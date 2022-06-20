@@ -15,7 +15,7 @@ const userRoutes = require('./routes/users');
 const placeRoutes = require('./routes/places');
 const reviewRoutes = require('./routes/reviews');
 
-mongoose.connect('mongodb://localhost:27017/yelp-camp', {
+mongoose.connect('mongodb://localhost:27017/places-varanasi', {
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true,
