@@ -20,15 +20,25 @@ module.exports.editForm = async (req, res) => {
 }
 
 module.exports.createPlace = async (req, res, next) => {
+
     const place = new Place(req.body.place);
+    place.images = req.files.map(f => ({ url: f.path, filename: f.filename }))
     place.author = req.user._id;
     await place.save();
+    console.log(place);
     req.flash('success', 'Successfully made a new place!');
     res.redirect(`/places/${place._id}`)
 }
 module.exports.editPlace = async (req, res) => {
     const { id } = req.params;
     const place = await Place.findByIdAndUpdate(id, { ...req.body.place });
+    const imgs = req.files.map(f => ({ url: f.path, filename: f.filename }));
+    place.images.push(...imgs);
+    await place.save();
+    if (req.body.deleteImages) {
+        await place.updateOne({ $pull: { images: { filename: { $in: req.body.deleteImages } } } })
+    }
+    //console.log(place);
     req.flash('success', 'Successfully updated place!');
     res.redirect(`/places/${place._id}`)
 }

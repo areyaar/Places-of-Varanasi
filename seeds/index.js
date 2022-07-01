@@ -28,7 +28,16 @@ const seedDB = async () => {
             author: '62afed6351d281538490429b',
             location: `${cities[random1000].city}, ${cities[random1000].state}`,
             title: `${sample(descriptors)} ${sample(places)}`,
-            image: 'https://source.unsplash.com/collection/483251',
+            images: [
+                {
+                  url: 'https://res.cloudinary.com/deugmr9cz/image/upload/v1655977986/PlacesOfVaranasi/y1111etephcnatxn1dlt.jpg',
+                  filename: 'PlacesOfVaranasi/y1111etephcnatxn1dlt'
+                },
+                {
+                  url: 'https://res.cloudinary.com/deugmr9cz/image/upload/v1655977986/PlacesOfVaranasi/izq8fnztbaqywtk8i1ms.jpg',
+                  filename: 'PlacesOfVaranasi/izq8fnztbaqywtk8i1ms'
+                }
+              ],
             description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam dolores vero perferendis laudantium, consequuntur voluptatibus nulla architecto, sit soluta esse iure sed labore ipsam a cum nihil atque molestiae deserunt!',
             price
         })

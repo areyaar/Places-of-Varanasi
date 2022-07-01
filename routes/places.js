@@ -3,21 +3,25 @@ const router = express.Router();
 const places = require('../controllers/places');
 const catchAsync = require('../utils/catchAsync');
 const { isLoggedIn, isAuthor, validatePlace } = require('../middleware');
+const multer = require('multer');
+const { storage } = require('../cloudinary')
+const upload = multer({ storage });
 
-const Place = require('../models/place.js');
+router.route('/')
+    .get(catchAsync(places.index))
+    .post(isLoggedIn, upload.array('image'), validatePlace, catchAsync(places.createPlace));
 
-router.get('/', catchAsync(places.index));
 
-router.get('/new', isLoggedIn, places.newForm)
 
-router.post('/', isLoggedIn, validatePlace, catchAsync(places.createPlace))
+router.get('/new', isLoggedIn, places.newForm);
 
-router.get('/:id', catchAsync(places.showPlace));
+router.route('/:id')
+    .get(catchAsync(places.showPlace))
+    .put(isLoggedIn, isAuthor, upload.array('image'), validatePlace, catchAsync(places.editPlace))
+    .delete(isLoggedIn, isAuthor, catchAsync(places.deletePlace));
+
 
 router.get('/:id/edit', isLoggedIn, isAuthor, catchAsync(places.editForm));
 
-router.put('/:id', isLoggedIn, isAuthor, validatePlace, catchAsync(places.editPlace));
-
-router.delete('/:id', isLoggedIn, isAuthor, catchAsync(places.deletePlace));
 
 module.exports = router;
