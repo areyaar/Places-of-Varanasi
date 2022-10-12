@@ -1,6 +1,6 @@
 # Places-of-Varanasi
 Heroku link - https://mysterious-castle-01370.herokuapp.com/places
-
+- A web-app for residents and travelers in Varanasi to help find the best places to visit.
 - Install and set up [NodeJS](https://www.youtube.com/watch?v=JINE4D0Syqw&ab_channel=Telusko).
 - Set up [MongoDB](https://www.youtube.com/watch?v=wcx3f0eUiAw&ab_channel=WebDevSimplified).
 - Type `git clone https://github.com/areyaar/Places-of-varanasi.git` on your git bash terminal and then `code .` to open the project on your favorite code editor.
